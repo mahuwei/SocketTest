@@ -10,7 +10,7 @@ namespace SocketServer {
       var ipHostInfo = Dns.GetHostEntry(Dns.GetHostName());
       var ipAddress = ipHostInfo.AddressList[0];
 
-      var tcpServer = SocketHelper.SocketServer.GetInstance("192.168.1.129", 11000);
+      var tcpServer = SocketHelper.SocketServer.GetInstance("192.168.1.200", 11000, false);
       tcpServer.OnPublishData += message => {
         Console.WriteLine($"{DateTime.Now:HH:mm:ss} 接收数据: {message}");
       };

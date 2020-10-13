@@ -161,10 +161,11 @@ namespace SocketHelper {
       state.WorkSocket.Shutdown(SocketShutdown.Both);
       state.WorkSocket.Close();
       state.WorkSocket.Dispose();
+      Console.WriteLine($"连接数:{_clients.Count}");
     }
 
     private void AddClient(SocketAsyncResult state) {
-      //虽然有信号量,还是用lock增加系数
+      // 虽然有信号量,还是用lock增加系数
       lock (LockObj) {
         var oldStateObject = _isIpOnly
           ? _clients.Find(o => o.Ip == state.Ip)
@@ -180,6 +181,8 @@ namespace SocketHelper {
           Console.WriteLine($"{state.Ip}:{state.Port}重新连接成功。");
         }
       }
+
+      Console.WriteLine($"连接数:{_clients.Count}");
     }
 
     /// <summary>

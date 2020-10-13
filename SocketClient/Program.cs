@@ -42,7 +42,7 @@ namespace SocketClient {
       //AsynchronousClient.Start();
       var ipHostInfo = Dns.GetHostEntry(Dns.GetHostName());
       var ipAddress = ipHostInfo.AddressList[0];
-      var tcpClient = SocketHelper.SocketClient.GetInstance("192.168.1.129", 11000);
+      var tcpClient = SocketHelper.SocketClient.GetInstance("192.168.1.200", 11000);
 
       tcpClient.OnPublishData += message => {
         Console.WriteLine($"{DateTime.Now:HH:mm:ss} 接收数据: {message}");

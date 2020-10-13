@@ -68,15 +68,16 @@ namespace SocketHelper {
     }
 
     public void Stop() {
-      _isStop = true;
+      //_isStop = true;
       if (_stateObjectCurrent?.WorkSocket == null || !_stateObjectCurrent.WorkSocket.Connected) {
         return;
       }
 
       Send(SocketAsyncResult.SocketCloseString);
-      OnPublishData = null;
       _stateObjectCurrent.WorkSocket.Disconnect(true);
-      _stateObjectCurrent = null;
+
+      //OnPublishData = null;
+      //_stateObjectCurrent = null;
     }
 
     public void Send(string message) {
@@ -205,6 +206,12 @@ namespace SocketHelper {
             foreach (var message in messages) {
               OnPublishData?.Invoke(message);
             }
+          }
+        }
+        else {
+          if (handler.Connected == false) {
+            Console.WriteLine("连接已断开(handler.Connected == false).");
+            return;
           }
         }
 
